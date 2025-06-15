@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="utf-8" />
+  <title>海面上昇シミュレーター</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <script src="https://unpkg.com/maplibre-gl@5.6.0/dist/maplibre-gl.js"></script>
+  <link href="https://unpkg.com/maplibre-gl@5.6.0/dist/maplibre-gl.css" rel="stylesheet" />
+  <link href="style.css" rel="stylesheet" />
+</head>
+
+<body>
+  <div id="map"></div>
+  <div class="map-overlay top">
+    <div class="map-overlay-inner">
+      <h2>海面上昇シミュレーション</h2>
+      <label>海面高さ: <span id="elevation-value">0m</span></label>
+      <input id="elevation-slider" type="range" min="0" max="100" step="1" value="0">
+      <input id="disclaimer-button" type="button" value="免責事項">
+    </div>
+  </div>
+  <script src="main.js"></script>
+</body>
+
+</html>
