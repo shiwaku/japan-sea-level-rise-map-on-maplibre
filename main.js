@@ -1,6 +1,10 @@
+const protocol = new pmtiles.Protocol();
+maplibregl.addProtocol("pmtiles", protocol.tile);
+
 const map = new maplibregl.Map({
   container: "map",
-  style: "https://tile.openstreetmap.jp/styles/maptiler-basic-ja/style.json",
+  // style: "https://tile.openstreetmap.jp/styles/maptiler-basic-ja/style.json",
+  style: "std.json",
   center: [140.048, 35.828],
   zoom: 8.26,
   maxPitch: 85,
@@ -51,7 +55,7 @@ map.on("load", () => {
     ],
     tileSize: 256,
     attribution:
-      "<a href='https://maps.gsi.go.jp/development/ichiran.html#dem' target='_blank'>地理院標高タイル</a>",
+      "<a href='https://maps.gsi.go.jp/development/ichiran.html#dem' target='_blank'>国土地理院 標高タイル</a>",
   });
 
   map.addLayer({
@@ -64,7 +68,7 @@ map.on("load", () => {
         ["linear"],
         ["elevation"],
         0,
-        "rgba(0,127,255,0.5)",
+        "rgba(0,0,152,0.5)",
         0.01,
         "rgba(0,0,0,0)",
       ],
@@ -84,7 +88,7 @@ slider.addEventListener("input", (e) => {
     ["linear"],
     ["elevation"],
     seaLevel,
-    "rgba(0,127,255,0.5)",
+    "rgba(0,0,152,0.5)",
     seaLevel + 0.01,
     "rgba(0,0,0,0)",
   ]);
