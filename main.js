@@ -4,8 +4,8 @@ maplibregl.addProtocol("pmtiles", protocol.tile);
 const map = new maplibregl.Map({
   container: "map",
   style: "std.json",
-  center: [140.048, 35.828],
-  zoom: 8.26,
+  center: [139.8304, 35.7103],
+  zoom: 11.33,
   maxPitch: 85,
   hash: true,
   attributionControl: false
@@ -22,7 +22,7 @@ map.addControl(new maplibregl.GeolocateControl({
 map.addControl(new maplibregl.ScaleControl({ maxWidth: 200, unit: "metric" }));
 
 const gsiAttribution = "<a href='https://maps.gsi.go.jp/development/ichiran.html#dem' target='_blank'>国土地理院 標高タイル</a>";
-const gsjAttribution = "<a href='https://tiles.gsj.jp/tiles/elev/tiles.html#h_mixed' target='_blank'>産業技術総合研究所 シームレス標高タイル</a>";
+const gsjAttribution = "<a href='https://tiles.gsj.jp/tiles/elev/tiles.html#h_land' target='_blank'>産業技術総合研究所 シームレス標高タイル</a>";
 const defaultLinks = '（<a href="https://twitter.com/shi__works" target="_blank">X(旧Twitter)</a> | <a href="https://github.com/shiwaku/japan-sea-level-rise-map-on-maplibre" target="_blank">GitHub</a>）';
 
 let attributionControl = new maplibregl.AttributionControl({

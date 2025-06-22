@@ -18,14 +18,14 @@
     <div class="map-overlay-inner">
       <h4>海面上昇シミュレーション</h4>
       <label>海面高さ: <span id="elevation-value">0m</span></label>
-      <input id="elevation-slider" type="range" min="0" max="50" step="0.5" value="0" />
+      <input id="elevation-slider" type="range" min="0" max="50" step="0.1" value="0" />
       <label for="source-selector">標高タイル:</label>
       <select id="source-selector">
         <option value="https://xs489works.xsrv.jp/raster-tiles/gsi/gsi-dem-terrain-rgb/{z}/{x}/{y}.png">
           地理院 標高タイル(DEM10B)
         </option>
-        <option value="https://gbank.gsj.jp/seamless/elev/terrainRGB257/mixed/{z}/{y}/{x}.png">
-          産総研 シームレス標高タイル(統合DEM)
+        <option value="https://gbank.gsj.jp/seamless/elev/terrainRGB257/land/{z}/{y}/{x}.png">
+          産総研 シームレス標高タイル(陸域統合DEM)
         </option>
       </select>
       <input id="disclaimer-button" type="button" value="免責事項" />

@@ -35,7 +35,7 @@ body {
 }
 
 .map-overlay-inner input[type="range"] {
-  width: 240px;
+  width: 250px;
 }
 
 .map-overlay-inner select,
