@@ -1,24 +1,34 @@
+<!-- index.html -->
 <!DOCTYPE html>
 <html lang="ja">
 
 <head>
-  <meta charset="utf-8" />
-  <title>海面上昇シミュレーター（地理院 標高タイル）</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>海面上昇シミュレーション</title>
   <script src="https://unpkg.com/maplibre-gl@5.6.0/dist/maplibre-gl.js"></script>
   <link href="https://unpkg.com/maplibre-gl@5.6.0/dist/maplibre-gl.css" rel="stylesheet" />
   <script src="https://unpkg.com/pmtiles@3.2.0/dist/pmtiles.js"></script>
-  <link href="style.css" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
 </head>
 
 <body>
-  <div id="map"></div>
-  <div class="map-overlay top">
+  <div id="map" class="map-container"></div>
+  <div class="map-overlay">
     <div class="map-overlay-inner">
-      <h2>海面上昇シミュレーション</h2>
+      <h4>海面上昇シミュレーション</h4>
       <label>海面高さ: <span id="elevation-value">0m</span></label>
-      <input id="elevation-slider" type="range" min="0" max="100" step="1" value="0">
-      <input id="disclaimer-button" type="button" value="免責事項">
+      <input id="elevation-slider" type="range" min="0" max="50" step="0.5" value="0" />
+      <label for="source-selector">標高タイル:</label>
+      <select id="source-selector">
+        <option value="https://xs489works.xsrv.jp/raster-tiles/gsi/gsi-dem-terrain-rgb/{z}/{x}/{y}.png">
+          地理院 標高タイル(DEM10B)
+        </option>
+        <option value="https://gbank.gsj.jp/seamless/elev/terrainRGB257/mixed/{z}/{y}/{x}.png">
+          産総研 シームレス標高タイル(統合DEM)
+        </option>
+      </select>
+      <input id="disclaimer-button" type="button" value="免責事項" />
     </div>
   </div>
   <script src="main.js"></script>
