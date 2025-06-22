@@ -4,8 +4,8 @@ maplibregl.addProtocol("pmtiles", protocol.tile);
 const map = new maplibregl.Map({
   container: "map",
   style: "std.json",
-  center: [139.8304, 35.7103],
-  zoom: 11.33,
+  center: [138.48936, 35.00936],
+  zoom: 12.7,
   maxPitch: 85,
   hash: true,
   attributionControl: false
@@ -26,11 +26,11 @@ const gsiAttribution =
 const gsjAttribution =
   "<a href='https://tiles.gsj.jp/tiles/elev/tiles.html#h_mixed' target='_blank'>産業技術総合研究所 シームレス標高タイル</a>";
 const defaultLinks =
-  '（<a href="https://twitter.com/shi__works" target="_blank">X(旧Twitter)</a> | <a href="https://github.com/shiwaku/japan-sea-level-rise-map-on-maplibre" target="_blank">GitHub</a>）';
+  '（<a href="https://twitter.com/shi__works" target="_blank">X(旧Twitter)</a> | <a href="https://github.com/shiwaku/japan-sea-level-rise-map-on-maplibre" target="_blank">GitHub</a>）|';
 
 let attributionControl = new maplibregl.AttributionControl({
   compact: true,
-  customAttribution: `${gsiAttribution} ${defaultLinks}`
+  customAttribution: `${defaultLinks} ${gsiAttribution}`
 });
 map.addControl(attributionControl, 'bottom-right');
 
@@ -46,8 +46,7 @@ map.on("load", () => {
     tiles: [
       "https://xs489works.xsrv.jp/raster-tiles/gsi/gsi-dem-terrain-rgb/{z}/{x}/{y}.png"
     ],
-    tileSize: 256,
-    attribution: gsiAttribution
+    tileSize: 256
   });
 
   map.addLayer({
@@ -64,7 +63,8 @@ map.on("load", () => {
     }
   });
 
-  // map.setTerrain({ source: "elevation", exaggeration: 1 });
+  map.setTerrain({ source: "elevation", exaggeration: 1 });
+
 
   const slider = document.getElementById("elevation-slider");
   const valueLabel = document.getElementById("elevation-value");
@@ -78,29 +78,29 @@ map.on("load", () => {
     ]);
   });
 
-  const selector = document.getElementById("source-selector");
-  selector.addEventListener("change", (e) => {
-    const newURL = e.target.value;
-    const isGSI = newURL.includes("gsi-dem-terrain-rgb");
-    const newAttr = isGSI ? gsiAttribution : gsjAttribution;
+const selector = document.getElementById("source-selector");
+selector.addEventListener("change", (e) => {
+  const newURL = e.target.value;
+  const newAttr = newURL.includes("gsi-dem-terrain-rgb")
+    ? gsiAttribution
+    : gsjAttribution;
 
-    map.removeControl(attributionControl);
-    attributionControl = new maplibregl.AttributionControl({
-      compact: true,
-      customAttribution: `${newAttr} ${defaultLinks}`
-    });
-    map.addControl(attributionControl, 'bottom-right');
-
-    const src = map.getSource("elevation");
-    src.tiles = [newURL];
-    src.attribution = newAttr;
-
-    const cache = map.style.sourceCaches["elevation"];
-    cache.clearTiles();
-    cache.reload();
-
-    // map.setTerrain({ source: "elevation", exaggeration: 1 });
+  map.removeControl(attributionControl);
+  attributionControl = new maplibregl.AttributionControl({
+    compact: true,
+    customAttribution: `${defaultLinks} ${newAttr}`
   });
+  map.addControl(attributionControl, 'bottom-right');
+
+  const src = map.getSource("elevation");
+  src.tiles = [newURL];
+
+  const cache = map.style.sourceCaches["elevation"];
+  cache.clearTiles();
+  cache.reload();
+
+  map.setTerrain({ source: "elevation", exaggeration: 1 });
+});
 
   document.getElementById("disclaimer-button").addEventListener("click", () => {
     alert(
