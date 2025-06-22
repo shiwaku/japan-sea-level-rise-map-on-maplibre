@@ -1,4 +1,4 @@
-protocol = new pmtiles.Protocol();
+const protocol = new pmtiles.Protocol();
 maplibregl.addProtocol("pmtiles", protocol.tile);
 
 const map = new maplibregl.Map({
@@ -21,9 +21,12 @@ map.addControl(new maplibregl.GeolocateControl({
 }));
 map.addControl(new maplibregl.ScaleControl({ maxWidth: 200, unit: "metric" }));
 
-const gsiAttribution = "<a href='https://maps.gsi.go.jp/development/ichiran.html#dem' target='_blank'>国土地理院 標高タイル</a>";
-const gsjAttribution = "<a href='https://tiles.gsj.jp/tiles/elev/tiles.html#h_land' target='_blank'>産業技術総合研究所 シームレス標高タイル</a>";
-const defaultLinks = '（<a href="https://twitter.com/shi__works" target="_blank">X(旧Twitter)</a> | <a href="https://github.com/shiwaku/japan-sea-level-rise-map-on-maplibre" target="_blank">GitHub</a>）';
+const gsiAttribution =
+  "<a href='https://maps.gsi.go.jp/development/ichiran.html#dem' target='_blank'>国土地理院 標高タイル</a>";
+const gsjAttribution =
+  "<a href='https://tiles.gsj.jp/tiles/elev/tiles.html#h_mixed' target='_blank'>産業技術総合研究所 シームレス標高タイル</a>";
+const defaultLinks =
+  '（<a href="https://twitter.com/shi__works" target="_blank">X(旧Twitter)</a> | <a href="https://github.com/shiwaku/japan-sea-level-rise-map-on-maplibre" target="_blank">GitHub</a>）';
 
 let attributionControl = new maplibregl.AttributionControl({
   compact: true,
@@ -54,14 +57,14 @@ map.on("load", () => {
     paint: {
       "color-relief-color": [
         "interpolate", ["linear"], ["elevation"],
-        0, "rgba(0,0,152,0.5)",
+        0,    "rgba(0,0,152,0.5)",
         0.01, "rgba(255,255,255,0)"
       ],
       "color-relief-opacity": 1
     }
   });
 
-  map.setTerrain({ source: "elevation", exaggeration: 1 });
+  // map.setTerrain({ source: "elevation", exaggeration: 1 });
 
   const slider = document.getElementById("elevation-slider");
   const valueLabel = document.getElementById("elevation-value");
@@ -70,7 +73,7 @@ map.on("load", () => {
     valueLabel.textContent = `${h}m`;
     map.setPaintProperty("sea-level", "color-relief-color", [
       "interpolate", ["linear"], ["elevation"],
-      h, "rgba(0,0,152,0.5)",
+      h,     "rgba(0,0,152,0.5)",
       h + 0.01, "rgba(255,255,255,0)"
     ]);
   });
@@ -79,24 +82,24 @@ map.on("load", () => {
   selector.addEventListener("change", (e) => {
     const newURL = e.target.value;
     const isGSI = newURL.includes("gsi-dem-terrain-rgb");
-    const newSrcAttribution = isGSI ? gsiAttribution : gsjAttribution;
+    const newAttr = isGSI ? gsiAttribution : gsjAttribution;
 
     map.removeControl(attributionControl);
     attributionControl = new maplibregl.AttributionControl({
       compact: true,
-      customAttribution: `${newSrcAttribution} ${defaultLinks}`
+      customAttribution: `${newAttr} ${defaultLinks}`
     });
     map.addControl(attributionControl, 'bottom-right');
 
     const src = map.getSource("elevation");
     src.tiles = [newURL];
-    src.attribution = newSrcAttribution;
+    src.attribution = newAttr;
 
     const cache = map.style.sourceCaches["elevation"];
     cache.clearTiles();
     cache.reload();
 
-    map.setTerrain({ source: "elevation", exaggeration: 1 });
+    // map.setTerrain({ source: "elevation", exaggeration: 1 });
   });
 
   document.getElementById("disclaimer-button").addEventListener("click", () => {
@@ -113,6 +116,6 @@ map.on("load", () => {
     "horizon-fog-blend": 0.8,
     "fog-color": "#2c7fb8",
     "fog-ground-blend": 0.9,
-    "atmosphere-blend": ["interpolate", ["linear"], ["zoom"], 0, 1, 12, 0],
+    "atmosphere-blend": ["interpolate", ["linear"], ["zoom"], 0, 1, 12, 0]
   });
 });
