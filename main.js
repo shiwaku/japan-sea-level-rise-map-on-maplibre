@@ -65,7 +65,6 @@ map.on("load", () => {
 
   map.setTerrain({ source: "elevation", exaggeration: 1 });
 
-
   const slider = document.getElementById("elevation-slider");
   const valueLabel = document.getElementById("elevation-value");
   slider.addEventListener("input", (e) => {
