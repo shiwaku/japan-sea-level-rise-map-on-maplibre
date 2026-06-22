@@ -1,0 +1,28 @@
+{
+  "name": "japan-sea-level-rise-map-on-maplibre",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "海面上昇シミュレーション on MapLibre GL JS",
+  "license": "MIT",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc --noEmit && vite build",
+    "preview": "vite preview",
+    "lint": "eslint .",
+    "format": "prettier --write ."
+  },
+  "dependencies": {
+    "maplibre-gl": "^5.24.0",
+    "pmtiles": "^4.4.1"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.18.0",
+    "eslint": "^9.18.0",
+    "eslint-config-prettier": "^10.0.0",
+    "prettier": "^3.4.2",
+    "typescript": "^5.7.3",
+    "typescript-eslint": "^8.20.0",
+    "vite": "^6.0.7"
+  }
+}
