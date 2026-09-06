@@ -15,7 +15,7 @@ export const elevationSources: ElevationSource[] = [
   {
     id: 'gsi',
     label: '地理院 標高タイル (DEM10B)',
-    url: 'https://xs489works.xsrv.jp/raster-tiles/gsi/gsi-dem-terrain-rgb/{z}/{x}/{y}.png',
+    url: 'https://shi-works.com/raster-tiles/gsi/gsi-dem-terrain-rgb/{z}/{x}/{y}.png',
     attribution:
       "<a href='https://maps.gsi.go.jp/development/ichiran.html#dem' target='_blank'>国土地理院 標高タイル</a>",
   },
